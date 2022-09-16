@@ -8,3 +8,15 @@ module.exports.getProductsService = async () => {
 module.exports.createProductService = async (data) => {
   return await Product.create(data);
 };
+
+module.exports.updateProductService = async (productId, data) => {
+  const result = await Product.updateOne(
+    { _id: productId },
+    { $set: data },
+    { runValidators: true }
+  );
+
+  // const product = await Product.findById(productId);
+  // const result = await product.set(data).save();
+  return result;
+};

@@ -1,6 +1,7 @@
 const {
   getProductsService,
   createProductService,
+  updateProductService,
 } = require("../services/product.services");
 
 module.exports.getProducts = async (req, res, next) => {
@@ -25,5 +26,15 @@ module.exports.createProduct = async (req, res, next) => {
     res.status(200).send(result);
   } catch (error) {
     res.status(400).send(error.message);
+  }
+};
+
+module.exports.updateProduct = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await updateProductService(id, req.body);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(400).send(error);
   }
 };
